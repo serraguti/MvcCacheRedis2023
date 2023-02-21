@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MvcCacheRedis.Models.Producto>
+
+@{
+    ViewData["Title"] = "Favoritos";
+}
+
+<h1>Favoritos</h1>
+
+@if (Model != null)
+{
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagen)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                <img src="@item.Imagen" style="width: 100px; height: 100px"/>
+            </td>
+            <td>
+                <a asp-controller="Productos"
+                    asp-action="DeleteFavorito"
+                    asp-route-id="@item.IdProducto"
+                    class="btn btn-danger">
+                    Delete
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+}
+else
+{
+    <h1 style="color:blue">
+        No hay productos favoritos
+    </h1>
+}
+
+
